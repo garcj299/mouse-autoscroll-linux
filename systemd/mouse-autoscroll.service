@@ -1,0 +1,19 @@
+# Windows-style middle-click autoscroll for any mouse (~/Projects/mouse-autoscroll).
+# Needs no Wayland display: it reads mice through evdev and writes through uinput,
+# and finds Hyprland's socket by itself at each press.
+[Unit]
+Description=Windows-style middle-click autoscroll
+# Crash loop guard: after 5 failures in 60 s it stays stopped (= normal mouse).
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=notify
+ExecStart=%h/.local/bin/mouse-autoscroll
+# If the daemon hangs while holding the grab, systemd kills it and the mouse is freed.
+WatchdogSec=5
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

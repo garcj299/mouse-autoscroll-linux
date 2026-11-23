@@ -1,0 +1,5 @@
+# mouse-autoscroll: let the logged-in user read mice (not keyboards) so the
+# daemon can run as a user service. "uaccess" grants an ACL to the active seat
+# session only; it is applied by 73-seat-late.rules, hence the number below 73.
+# Trackpoints keep libinput's own middle-button scrolling and are left out.
+ACTION=="add|change", SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT_MOUSE}=="1", ENV{ID_INPUT_POINTINGSTICK}!="1", TAG+="uaccess"

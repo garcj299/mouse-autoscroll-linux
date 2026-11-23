@@ -1,0 +1,15 @@
+# Origin marker for mouse-autoscroll. Separate from the daemon on purpose:
+# if a quickshell-git/Qt6 update breaks it, scrolling keeps working.
+# Same default.target + retry scheme as caelestia-caps-osd: Wayland may not be up yet at login.
+[Unit]
+Description=Autoscroll origin indicator
+StartLimitIntervalSec=120
+StartLimitBurst=40
+
+[Service]
+ExecStart=/usr/bin/qs -p %h/Projects/mouse-autoscroll/indicator
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

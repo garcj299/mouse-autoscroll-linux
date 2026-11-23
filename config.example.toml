@@ -1,0 +1,20 @@
+# ~/.config/mouse-autoscroll/config.toml  (optional; these are the defaults)
+# Apply changes with: systemctl --user restart mouse-autoscroll
+
+[scroll]
+deadzone = 12       # px around the origin with no scrolling; also the click/hold split
+min_speed = 1.0     # wheel notches/s right outside the dead zone
+slope = 0.0086      # main zone: min_speed + slope * (distance - deadzone) ^ exponent
+exponent = 1.3
+edge_zone = 0.05    # last 5 % of the screen towards the edge: exponential up to max_speed (0 = off)
+max_speed = 250     # notches/s, reached at the screen edge
+sensitivity = 1.0   # multiplies the main zone speed (1.5 = 50 % faster); the edge still ends at max_speed
+free_pointer = true # the pointer moves while scrolling, like in Zen; false = frozen at the origin
+tick_hz = 120       # wheel events per second while scrolling
+
+[apps]
+# Hyprland window classes, shell-style globs, case-insensitive.
+# See classes with: hyprctl clients | grep class
+# A list here replaces the default list.
+ignore = ["zen", "firefox", "steam_app_*"]                    # untouched (native autoscroll, games)
+hold = ["kitty", "thunar", "code", "*obsidian*", "discord"]   # short click stays native; hold scrolls
